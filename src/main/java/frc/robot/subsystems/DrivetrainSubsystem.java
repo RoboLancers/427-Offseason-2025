@@ -52,6 +52,10 @@ public class DrivetrainSubsystem extends SubsystemBase {
   }
   private DifferentialDrive drive;
 
+  public void arcadeDrive(double movespeed, double rotatespeed){
+    drive.arcadeDrive(moveSpeed, rotateSpeed);
+  }
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
