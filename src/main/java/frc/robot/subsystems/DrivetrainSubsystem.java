@@ -56,4 +56,8 @@ public class DrivetrainSubsystem extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
   }
+
+  public void tankDrive(double moveSpeed, double rotateSpeed) {
+    drive.tankDrive(moveSpeed, rotateSpeed);
+  }
 }
