@@ -3,12 +3,15 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot.subsystems;
-
+import frc.robot.Constants.DriveConstants;
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-
 import com.revrobotics.spark.SparkLowLevel.MotorType;
+import com.revrobotics.spark.SparkMax;
+import com.revrobotics.spark.config.SparkMaxConfig; 
+import com.revrobotics.spark.SparkBase.PersistMode;
+import com.revrobotics.spark.SparkBase.ResetMode;
 
-import com.revrobotics.spark.SparkMax; 
 
 public class DrivetrainSubsystem extends SubsystemBase {
   private final SparkMax leftLeader;
@@ -18,17 +21,36 @@ public class DrivetrainSubsystem extends SubsystemBase {
 
   /** Creates a new DrivetrainSubsystem. */
   public DrivetrainSubsystem() {
-    leftLeader = new SparkMax(LEFT_LEADER_ID, MotorType.kBrushed);
-    leftFollower = new SparkMax(LEFT_FOLLOWER_ID, MotorType.kBrushed);
-    rightLeader = new SparkMax(RIGHT_LEADER_ID, MotorType.kBrushed);
-    rightFollower = new SparkMax(RIGHT_FOLLOWER_ID, MotorType.kBrushed);
+    leftLeader = new SparkMax(DriveConstants.LEFT_LEADER_ID, MotorType.kBrushed);
+    leftFollower = new SparkMax(DriveConstants.LEFT_FOLLOWER_ID, MotorType.kBrushed);
+    rightLeader = new SparkMax(DriveConstants.RIGHT_LEADER_ID, MotorType.kBrushed);
+    rightFollower = new SparkMax(DriveConstants.RIGHT_FOLLOWER_ID, MotorType.kBrushed);
+    
+  
     leftLeader.setCANTimeout(250);
     rightLeader.setCANTimeout(250);
     leftFollower.setCANTimeout(250);
     rightFollower.setCANTimeout(250);
 
+    SparkMaxConfig config = new SparkMaxConfig();
+    config.voltageCompensation(12);
+    config.smartCurrentLimit(DriveConstants.DRIVE_MOTOR_CURRENT_LIMIT);
+
+    drive = new DifferentialDrive(leftMotors, rightMotors);
+
+    config.follow(leftLeader);
+    leftFollower.configure(config, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
+
+    config.follow(rightLeader);
+    rightFollower.configure(config, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
+
+    config.disableFollowerMode();
+    rightLeader.configure(config, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
+
+    config.inverted(true);
+    leftLeader.configure(config, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
   }
-  
+  private DifferentialDrive drive;
 
   @Override
   public void periodic() {
