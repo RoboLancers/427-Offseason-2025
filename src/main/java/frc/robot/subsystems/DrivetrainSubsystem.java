@@ -15,6 +15,8 @@ import frc.robot.Constants.DriveConstants;
 
 
 
+
+
 public class DrivetrainSubsystem extends SubsystemBase {
   /** Creates a new DrivetrainSubsystem. */
   private final SparkMax leftLeader;
@@ -22,6 +24,7 @@ public class DrivetrainSubsystem extends SubsystemBase {
   private final SparkMax rightLeader;
   private final SparkMax rightFollower;
   private DifferentialDrive drive;
+
 
   public DrivetrainSubsystem() {
     leftLeader = new SparkMax(DriveConstants.LEFT_LEADER_ID, MotorType.kBrushed);
@@ -50,5 +53,9 @@ public class DrivetrainSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+  }
+  public void arcadeDrive(double moveSpeed, double rotateSpeed){
+
+    drive.tankDrive(moveSpeed, rotateSpeed);
   }
 }
