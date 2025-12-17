@@ -18,36 +18,35 @@ import com.revrobotics.spark.SparkBase.ResetMode;
   private final SparkMax leftFollower;
   private final SparkMax rightLeader;
   private final SparkMax rightFollower;
-
+ 
+  private final DifferentialDrive drive;
+ drive = new DiffrentalDrive(leftMotors, rightMotors);
   // **creates new drivetrain */
   /** Creates a new Drivetrainsubsysteem. */
+
   public Drivetrainsubsysteem() {
     leftLeader = new SparkMax(DriveConstants.LEFT_LEADER_ID, MotorType.kBrushed);
     leftFollower = new SparkMax(DriveConstants.LEFT_FOLLOWER_ID, MotorType.kBrushed);
     rightLeader = new SparkMax(DriveConstants.RIGHT_LEADER_ID, MotorType.kBrushed);
     rightFollower = new SparkMax(DriveConstants.RIGHT_FOLLOWER_ID, MotorType.kBrushed);
+
+    leftLeader.setCANTimeout(250);
+ leftFollower.setCANTimeout(250);
+ rightLeader.setCANTimeout(250);
+ rightFollower.setCANTimeout(250);
+
+ 
+ config.follow(leftLeader);
+ leftFollower.configure(config, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
+ config.follow(rightLeader);
+ right.Follower.configure(config, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
+
   }
 
-  @Override
+ 
+
+ @Override
   public void periodic() {
     // This method will be called once per scheduler run
   }
- leftLeader.setCANTimeout(250);
- leftFollower.setCANTimeout(250);
- rightLeaer.setCANTimeout(250);
- rightleader.setCANTimeout(250);
-
- SparkMaxConfig = new SparkMaxConfig();
- config.voltageCompesation(12);
- config.smartCurrentLimit(DriveConstants.DRIVE_MOTOR_CURENT_LIMIT);
-
- private final DifferentialDrive drive;
- drive = new DiffrentalDrive(leftMotors, rightMotors);
-
- config.follow(leftLeader);
-  leftFollower.configure(config, ResetMode.kResetSafeParameters, PersistMode.kPersistSafeParameters);
-config.follow(rightleader);
-right.Follower.configure(config, ResetMode.kResetSafeparameters, PersistMode.kPersistSafeparameters);
-
-}
-}
+  }
