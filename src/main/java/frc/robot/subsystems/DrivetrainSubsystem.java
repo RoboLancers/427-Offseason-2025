@@ -37,19 +37,16 @@ public class DrivetrainSubsystem extends SubsystemBase {
     config.voltageCompensation(12);
     config.smartCurrentLimit(DriveConstants.DRIVE_MOTOR_CURRENT_LIMIT);
 
-    drive = new DifferentialDrive(leftMotors, rightMotors);
-
     config.follow(leftLeader);
     leftFollower.configure(config, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
-    
     config.follow(rightLeader);
     rightFollower.configure(config, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
-
     config.disableFollowerMode();
     rightLeader.configure(config, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
-
     config.inverted(true);
     leftLeader.configure(config, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
+
+    drive = new DifferentialDrive(leftLeader, rightLeader);
   }
   
   @Override
@@ -57,7 +54,7 @@ public class DrivetrainSubsystem extends SubsystemBase {
     // This method will be called once per scheduler run
   }
 
-  public void tankDrive(double moveSpeed, double rotateSpeed) {
-    drive.tankDrive(moveSpeed, rotateSpeed);
+  public void arcadeDrive(double moveSpeed, double rotateSpeed) {
+    drive.arcadeDrive(moveSpeed, rotateSpeed);
   }
 }
