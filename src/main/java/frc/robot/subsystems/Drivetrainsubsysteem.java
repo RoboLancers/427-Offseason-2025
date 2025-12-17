@@ -2,14 +2,18 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.subsystems;
+ package frc.robot.subsystems;
 
-import com.revrobotics.spark.SparkLowLevel.MotorType;
-import com.revrobotics.spark.SparkMax;
+ import com.revrobotics.spark.SparkLowLevel.MotorType;
+ import com.revrobotics.spark.SparkMax;
+
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants.DriveConstants;
+ import frc.robot.Constants.DriveConstants;
+ import com.revrobotics.spark.SparkBase.PersistMode;
+import com.revrobotics.spark.SparkBase.ResetMode;
 
-public class Drivetrainsubsysteem extends SubsystemBase {
+ public class Drivetrainsubsysteem extends SubsystemBase {
   private final SparkMax leftLeader;
   private final SparkMax leftFollower;
   private final SparkMax rightLeader;
@@ -28,4 +32,22 @@ public class Drivetrainsubsysteem extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
   }
+ leftLeader.setCANTimeout(250);
+ leftFollower.setCANTimeout(250);
+ rightLeaer.setCANTimeout(250);
+ rightleader.setCANTimeout(250);
+
+ SparkMaxConfig = new SparkMaxConfig();
+ config.voltageCompesation(12);
+ config.smartCurrentLimit(DriveConstants.DRIVE_MOTOR_CURENT_LIMIT);
+
+ private final DifferentialDrive drive;
+ drive = new DiffrentalDrive(leftMotors, rightMotors);
+
+ config.follow(leftLeader);
+  leftFollower.configure(config, ResetMode.kResetSafeParameters, PersistMode.kPersistSafeParameters);
+config.follow(rightleader);
+right.Follower.configure(config, ResetMode.kResetSafeparameters, PersistMode.kPersistSafeparameters);
+
+}
 }
