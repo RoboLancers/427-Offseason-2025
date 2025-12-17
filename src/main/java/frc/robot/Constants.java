@@ -17,4 +17,8 @@ public final class Constants {
     public static final int RIGHT_FOLLOWER_ID = 4;
     public static final int kDriverControllerPort = 0;
   }
+  public static final class OperatorConstants {
+    public static final int DRIVER_CONTROLLER_PORT = 0;
+    public static final int OPERATOR_CONTROLLER_PORT = 1;
+  }
 }

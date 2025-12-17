@@ -15,7 +15,10 @@ public class DriveArcade extends Command {
   private final DrivetrainSubsystem driveSubsystem;
  
   public DriveArcade(DoubleSupplier xSpeed, DoubleSupplier zRotation, DrivetrainSubsystem driveSubsystem) {
-    // Use addRequirements() here to declare subsystem dependencies.
+    this.xSpeed = xSpeed;
+    this.zRotation = zRotation;
+    this.driveSubsystem = driveSubsystem;
+    addRequirements(this.driveSubsystem);
   }
 
   // Called when the command is initially scheduled.
@@ -24,11 +27,15 @@ public class DriveArcade extends Command {
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {}
+  public void execute() {
+    driveSubsystem.arcadeDrive(xSpeed.getAsDouble(), zRotation.getAsDouble());
+  }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    driveSubsystem.arcadeDrive(0, 0);
+  }
 
   // Returns true when the command should end.
   @Override
