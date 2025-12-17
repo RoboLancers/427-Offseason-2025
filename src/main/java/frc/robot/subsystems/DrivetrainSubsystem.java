@@ -36,7 +36,7 @@ public class DrivetrainSubsystem extends SubsystemBase {
     config.voltageCompensation(12);
     config.smartCurrentLimit(DriveConstants.DRIVE_MOTOR_CURRENT_LIMIT);
 
-    drive = new DifferentialDrive(leftMotors, rightMotors);
+    drive = new DifferentialDrive(leftLeader, rightLeader);
 
     config.follow(leftLeader);
     leftFollower.configure(config, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
@@ -50,10 +50,10 @@ public class DrivetrainSubsystem extends SubsystemBase {
     config.inverted(true);
     leftLeader.configure(config, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
   }
-  private DifferentialDrive drive;
+  private final DifferentialDrive drive;
 
-  public void arcadeDrive(double movespeed, double rotatespeed){
-    drive.arcadeDrive(moveSpeed, rotateSpeed);
+  public void DriveArcade(double movespeed, double rotatespeed){
+    drive.arcadeDrive(movespeed, rotatespeed);
   }
 
   @Override

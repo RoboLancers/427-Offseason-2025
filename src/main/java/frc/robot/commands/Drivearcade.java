@@ -5,14 +5,25 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.subsystems.DriveSubsystem;
+import frc.robot.subsystems.DrivetrainSubsystem;
 import java.util.function.DoubleSupplier;
+
+
+
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
 public class DriveArcade extends Command {
+  private final DoubleSupplier xSpeed;
+private final DoubleSupplier zRotation;
+private final DrivetrainSubsystem driveSubsystem;
+
+
   /** Creates a new DriveArcade. */
-  public DriveArcade() {
-    private final DoubleSupplier xSpeed;
-    private final DoubleSupplier zRotation;
+  public DriveArcade(DoubleSupplier xSpeed, DoubleSupplier zRotation, DrivetrainSubsystem driveSubsystem) {
+    // Use addRequirements() here to declare subsystem dependencies.
+    this.xSpeed = xSpeed;
+    this.zRotation = zRotation;
+    this.driveSubsystem = driveSubsystem;
+    addRequirements(this.driveSubsystem);
   }
 
   // Called when the command is initially scheduled.
@@ -21,11 +32,15 @@ public class DriveArcade extends Command {
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {}
+  public void execute() {
+    driveSubsystem.DriveArcade(xSpeed.getAsDouble(), zRotation.getAsDouble());
+  }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    this.driveSubsystem.DriveArcade(0, 0);
+  }
 
   // Returns true when the command should end.
   @Override
