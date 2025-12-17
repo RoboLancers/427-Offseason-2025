@@ -41,11 +41,14 @@ public class DriveTrainSubsystem extends SubsystemBase {
   config.follow(rightLeader);
   rightFollower.configure(config, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
   
+  config.disableFollowerMode();
+  rightLeader.configure(config, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
+
   config.inverted(true);
   leftLeader.configure(config, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
-
-  drive = new DifferentialDrive(leftMotors, rightMotors);
-
+  
+  drive = new DifferentialDrive(leftLeader, rightLeader);
+  
   }
 
   @Override
@@ -57,4 +60,5 @@ public class DriveTrainSubsystem extends SubsystemBase {
     drive.tankDrive(moveSpeed, rotateSpeed);
 
   }
+
 }

@@ -4,6 +4,7 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.DriveTrainSubsystem;
 import java.util.function.DoubleSupplier;
@@ -14,14 +15,22 @@ import java.util.function.DoubleSupplier;
 public class DriveArcade extends Command {
 
   private final DoubleSupplier xSpeed;
-private final DoubleSupplier zRotation;
-private final DriveTrainSubsystem driveSubsystem;
-
+  private final DoubleSupplier zRotation;
+  private final DriveTrainSubsystem driveSubsystem;
 
   /** Creates a new DriveArcade. */
-  public DriveArcade() {
-    // Use addRequirements() here to declare subsystem dependencies.
+  public DriveArcade(DoubleSupplier xSpeed, DoubleSupplier zRotation, DriveTrainSubsystem driveSubsystem){
+
+    this.xSpeed = xSpeed;
+    this.zRotation = zRotation;
+    this.driveSubsystem = driveSubsystem;
+    addRequirements(this.driveSubsystem);
+
   }
+
+
+
+  
 
   // Called when the command is initially scheduled.
   @Override
