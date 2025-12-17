@@ -1,3 +1,5 @@
+//I SWEAR I DID CODE I JUST ACCIDENTALLY DELTED THIS SUBSYTEM THEN I BROUGHT IT BACK BUT LIKE IT NEVER SAVED SO LIKE IM SOWWWWWY ILL FIX IT OVER BREAK
+
 // Copyright (c) FIRST and other WPILib contributors.
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
@@ -35,7 +37,7 @@ public class DrivetrainSubsystem extends SubsystemBase {
   //Config for voltage compensation or smth idfk
   SparkMaxConfig config = new SparkMaxConfig();
   config.voltageCompensation(12);
-  config.smartCurrentLimit(DriveConstants.DRIVE_MOTOR_CURRENT_LIMIT);
+  config.smartCurrentLimit(Constants.DRIVE_MOTOR_CURRENT_LIMIT);
 
   public DrivetrainSubsystem() {
     // Talons
