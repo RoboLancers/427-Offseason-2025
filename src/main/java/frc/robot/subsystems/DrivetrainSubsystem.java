@@ -45,9 +45,9 @@ public class DrivetrainSubsystem extends SubsystemBase {
     rightFollower = new SparkMax(3, MotorType.kBrushed);
   }
 
-  //
+  /*
 
-  //X THIS LATER (PREFERABLY TOMMAROW SICNE I NEED THIS DONE REALLY FRIGGEN SOON)
+  FIX THIS LATER (PREFERABLY TOMMAROW SICNE I NEED THIS DONE REALLY FRIGGEN SOON)
    private final DifferentialDrive drive;
    drive = new DifferentialDrive(leftMotors, rightMotors);
 
