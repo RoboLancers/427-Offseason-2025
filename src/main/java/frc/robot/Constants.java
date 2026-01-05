@@ -19,4 +19,6 @@ public final class Constants {
 
     public static final int kDriverControllerPort = 0;
   }
+
+  public static final int DRIVE_MOTOR_CURRENT_LIMIT = 0;
 }
